@@ -19,7 +19,12 @@
 
 #include "BLDC_controller.h"
 
+//#ifdef SPD_MODE_MAX
 #define ABS(a) (((a) < 0) ? -(a) : (a))
+int16_T Switch2OtherMot = 1;   // = speed(revs) calculated by previous BLDC_controller_step() = opposite motor BLDC_controller_step :-)
+int16_T Switch2Test = 2;
+//#endif
+
 
 
 /* Named constants for Chart: '<S5>/F03_02_Control_Mode_Manager' */

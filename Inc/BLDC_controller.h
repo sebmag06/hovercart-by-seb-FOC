@@ -27,10 +27,6 @@
 #include "rtwtypes.h"
 #endif                                 /* BLDC_controller_COMMON_INCLUDES_ */
 
-//#ifdef SPD_MODE_MAX
-  int16_T Switch2OtherMot = 1;   // = speed(revs) calculated by previous BLDC_controller_step() = opposite motor BLDC_controller_step :-)
-  int16_T Switch2Test = 2;
-//#endif
 
 /* Macros for accessing real-time model data structure */
 
