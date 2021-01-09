@@ -1000,6 +1000,7 @@ void PI_clamp_fixdt_k(int16_T rtu_err, uint16_T rtu_P, uint16_T rtu_I, int16_T
 
 #ifdef SPD_MODE_MAX
   static int16_T Switch2OtherMot = 1;   // = speed(revs) calculated by previous BLDC_controller_step() = opposite motor BLDC_controller_step :-)
+  static int16_T Switch2Test = 2;
 #endif
 
 
@@ -1233,6 +1234,7 @@ void BLDC_controller_step(RT_MODEL *const rtM)
 #ifdef SPD_MODE_MAX
   if (ABS(Switch2) < ABS(Switch2OtherMot)) Switch2 = Switch2OtherMot;   // apply outer motor speed
   Switch2OtherMot = Switch; // next call will be other/opposite motor :-)
+  Switch2Test = Switch;
 #endif
 
   /* End of Switch: '<S13>/Switch2' */

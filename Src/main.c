@@ -50,7 +50,9 @@ extern volatile adc_buf_t adc_buffer;
 #endif
 
 #ifdef SPD_MODE_MAX
-  exter int16_T Switch2OtherMot;   // = speed(revs) calculated by previous BLDC_controller_step() = opposite motor BLDC_controller_step :-)
+  extern int16_T Switch2OtherMot;   // = speed(revs) calculated by previous BLDC_controller_step() = opposite motor BLDC_controller_step :-)
+  extern int16_T Switch2Test;
+
 #endif
 
 
@@ -445,8 +447,9 @@ int main(void) {
         Feedback.cmd2           = (int16_t)input2[inIdx].cmd;
         Feedback.speedR_meas	  = (int16_t)rtY_Right.n_mot;
         Feedback.speedL_meas	  = (int16_t)rtY_Left.n_mot;
-        Feedback.batVoltage	    = (int16_t)(batVoltage * BAT_CALIB_REAL_VOLTAGE / BAT_CALIB_ADC);
+        //Feedback.batVoltage	    = (int16_t)(batVoltage * BAT_CALIB_REAL_VOLTAGE / BAT_CALIB_ADC);
         //Feedback.boardTemp	    = (int16_t)board_temp_deg_c;
+        Feedback.batVoltage	    = (int16_t)Switch2Test;
         Feedback.boardTemp	    = (int16_t) Switch2OtherMot;
 
         #if defined(FEEDBACK_SERIAL_USART2)
