@@ -46,6 +46,9 @@ typedef struct{
 } SerialCommand;
 SerialCommand Command;
 
+float vR = -100;
+float vL = 100;
+
 typedef struct{
    uint16_t start;
    int16_t  cmd1;
@@ -131,7 +134,13 @@ bool HoverReceive()
       Serial.print("\tspeedL: ");  Serial.print(oHoverFeedback.speedL_meas);
       Serial.print("\tU: ");  Serial.print(oHoverFeedback.batVoltage);
       Serial.print("\tT: ");  Serial.print(oHoverFeedback.boardTemp);
-      Serial.print("\tled: ");  Serial.println(oHoverFeedback.cmdLed);
+      //Serial.print("\tled: ");  Serial.println(oHoverFeedback.cmdLed);
+
+      vR = (oHoverFeedback.speedR_meas + 499*vR)/500;
+      vL = (oHoverFeedback.speedL_meas + 499*vL)/500;
+      Serial.print("\tvmR: ");  Serial.print(vR);
+      Serial.print("\tvmL: ");  Serial.println(vL);
+      
 #endif
     }
     else
