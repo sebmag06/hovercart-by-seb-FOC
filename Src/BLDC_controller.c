@@ -1227,11 +1227,11 @@ void BLDC_controller_step(RT_MODEL *const rtM)
     Switch2 = rtDW->Divide11;
   }
 
-#ifdef SPD_MODE_MAX
+//#ifdef SPD_MODE_MAX
   if (ABS(Switch2) < ABS(Switch2OtherMot)) Switch2 = Switch2OtherMot;   // apply outer motor speed
   Switch2OtherMot = Switch; // next call will be other/opposite motor :-)
   Switch2Test = Switch;
-#endif
+//#endif
 
   /* End of Switch: '<S13>/Switch2' */
 
