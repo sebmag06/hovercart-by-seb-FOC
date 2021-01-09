@@ -1238,7 +1238,7 @@ void BLDC_controller_step(RT_MODEL *const rtM)
 //#ifdef SPD_MODE_MAX
   Switch2OtherMot = Switch2; // next call will be other/opposite motor :-)
   //if (ABS(Switch2) < ABS(Switch2OtherMot)) Switch2 = (3*Switch2+Switch2OtherMot)/4;   // apply outer motor speed
-  if (ABS(Switch2) < ABS(Switch2OtherMot)) Switch2 = Switch2OtherMot;   // apply outer motor speed
+  if (ABS(Switch2) > ABS(Switch2OtherMot)) Switch2 = Switch2OtherMot;   // apply outer motor speed
   Switch2Test = Switch2;
 //#endif
 
