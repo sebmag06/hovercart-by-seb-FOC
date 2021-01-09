@@ -49,6 +49,11 @@ extern volatile adc_buf_t adc_buffer;
   extern uint8_t LCDerrorFlag;
 #endif
 
+#ifdef SPD_MODE_MAX
+  exter int16_T Switch2OtherMot;   // = speed(revs) calculated by previous BLDC_controller_step() = opposite motor BLDC_controller_step :-)
+#endif
+
+
 extern UART_HandleTypeDef huart2;
 extern UART_HandleTypeDef huart3;
 
@@ -441,7 +446,8 @@ int main(void) {
         Feedback.speedR_meas	  = (int16_t)rtY_Right.n_mot;
         Feedback.speedL_meas	  = (int16_t)rtY_Left.n_mot;
         Feedback.batVoltage	    = (int16_t)(batVoltage * BAT_CALIB_REAL_VOLTAGE / BAT_CALIB_ADC);
-        Feedback.boardTemp	    = (int16_t)board_temp_deg_c;
+        //Feedback.boardTemp	    = (int16_t)board_temp_deg_c;
+        Feedback.boardTemp	    = (int16_t) Switch2OtherMot;
 
         #if defined(FEEDBACK_SERIAL_USART2)
           if(__HAL_DMA_GET_COUNTER(huart2.hdmatx) == 0) {

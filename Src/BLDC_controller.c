@@ -998,6 +998,12 @@ void PI_clamp_fixdt_k(int16_T rtu_err, uint16_T rtu_P, uint16_T rtu_I, int16_T
   localDW->ResettableDelay_DSTATE = rtb_Sum1_bm;
 }
 
+#ifdef SPD_MODE_MAX
+  static int16_T Switch2OtherMot = 0;   // = speed(revs) calculated by previous BLDC_controller_step() = opposite motor BLDC_controller_step :-)
+#endif
+
+
+
 /* Model step function */
 void BLDC_controller_step(RT_MODEL *const rtM)
 {
@@ -1030,9 +1036,6 @@ void BLDC_controller_step(RT_MODEL *const rtM)
   int16_T tmp[4];
   int8_T UnitDelay3;
 
-#ifdef SPD_MODE_MAX
-  static int16_T Switch2OtherMot = 0;   // = speed(revs) calculated by previous BLDC_controller_step() = opposite motor BLDC_controller_step :-)
-#endif
 
   /* Outputs for Atomic SubSystem: '<Root>/BLDC_controller' */
   /* Sum: '<S11>/Sum' incorporates:
@@ -1228,7 +1231,7 @@ void BLDC_controller_step(RT_MODEL *const rtM)
   }
 
 #ifdef SPD_MODE_MAX
-  if (ABS(Switch2) > ABS(Switch2OtherMot)) Switch2 = Switch2OtherMot;   // apply outer motor speed
+  if (ABS(Switch2) < ABS(Switch2OtherMot)) Switch2 = Switch2OtherMot;   // apply outer motor speed
   Switch2OtherMot = Switch; // next call will be other/opposite motor :-)
 #endif
 
