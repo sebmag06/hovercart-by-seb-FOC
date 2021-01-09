@@ -450,7 +450,7 @@ int main(void) {
         //Feedback.batVoltage	    = (int16_t)(batVoltage * BAT_CALIB_REAL_VOLTAGE / BAT_CALIB_ADC);
         //Feedback.boardTemp	    = (int16_t)board_temp_deg_c;
         Feedback.batVoltage	    = (int16_t)Switch2Test;
-        Feedback.boardTemp	    = (int16_t) 42;//Switch2OtherMot;
+        Feedback.boardTemp	    = (int16_t) Switch2OtherMot;
 
         #if defined(FEEDBACK_SERIAL_USART2)
           if(__HAL_DMA_GET_COUNTER(huart2.hdmatx) == 0) {

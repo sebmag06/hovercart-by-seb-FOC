@@ -127,11 +127,11 @@ bool HoverReceive()
       // Print data to built-in Serial
       Serial.print("1: ");   Serial.print(oHoverFeedback.cmd1);
       Serial.print("\t2: ");  Serial.print(oHoverFeedback.cmd2);
-      Serial.print("\t3: ");  Serial.print(oHoverFeedback.speedR_meas);
-      Serial.print("\t4: ");  Serial.print(oHoverFeedback.speedL_meas);
-      Serial.print("\t5: ");  Serial.print(oHoverFeedback.batVoltage);
-      Serial.print("\t6: ");  Serial.print(oHoverFeedback.boardTemp);
-      Serial.print("\t7: ");  Serial.println(oHoverFeedback.cmdLed);
+      Serial.print("\tspeedR: ");  Serial.print(oHoverFeedback.speedR_meas);
+      Serial.print("\tspeedL: ");  Serial.print(oHoverFeedback.speedL_meas);
+      Serial.print("\tU: ");  Serial.print(oHoverFeedback.batVoltage);
+      Serial.print("\tT: ");  Serial.print(oHoverFeedback.boardTemp);
+      Serial.print("\tled: ");  Serial.println(oHoverFeedback.cmdLed);
 #endif
     }
     else

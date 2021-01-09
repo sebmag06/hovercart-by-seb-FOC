@@ -17,6 +17,12 @@
  * Validation result: Not run
  */
 
+#ifdef SPD_MODE_MAX
+  static int16_T Switch2OtherMot = 1;   // = speed(revs) calculated by previous BLDC_controller_step() = opposite motor BLDC_controller_step :-)
+  static int16_T Switch2Test = 2;
+#endif
+
+
 #ifndef RTW_HEADER_BLDC_controller_h_
 #define RTW_HEADER_BLDC_controller_h_
 #include "rtwtypes.h"
