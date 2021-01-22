@@ -80,6 +80,7 @@ void HoverSend(int16_t uSteer, int16_t uSpeed)
 
   // Write to Serial
   HoverSerial.write((uint8_t *) &Command, sizeof(Command)); 
+  Serial.print("sending speed: ");Serial.println(Command.speed);
 }
 
 // ########################## RECEIVE ##########################
@@ -132,8 +133,8 @@ bool HoverReceive()
       Serial.print("\t2: ");  Serial.print(oHoverFeedback.cmd2);
       Serial.print("\tspeedR: ");  Serial.print(oHoverFeedback.speedR_meas);
       Serial.print("\tspeedL: ");  Serial.print(oHoverFeedback.speedL_meas);
-      Serial.print("\tU: ");  Serial.print(oHoverFeedback.batVoltage);
-      Serial.print("\tT: ");  Serial.print(oHoverFeedback.boardTemp);
+      Serial.print("\tiU: ");  Serial.print(oHoverFeedback.batVoltage);
+      Serial.print("\tiT: ");  Serial.print(oHoverFeedback.boardTemp);
       //Serial.print("\tled: ");  Serial.println(oHoverFeedback.cmdLed);
 
       vR = (oHoverFeedback.speedR_meas + 499*vR)/500;
