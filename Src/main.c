@@ -1,4 +1,4 @@
-/*
+/* object oriented fork
 * This file is part of the hoverboard-firmware-hack project.
 *
 * Copyright (C) 2017-2018 Rene Hopf <renehopf@mac.com>
