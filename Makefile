@@ -57,8 +57,8 @@ startup_stm32f103xe.s
 #######################################
 PREFIX = arm-none-eabi-
 #PREFIX = gcc-arm-none-eabi-7/bin/arm-none-eabi-
-CC = $(PREFIX)gcc
-AS = $(PREFIX)gcc -x assembler-with-cpp
+CC = $(PREFIX)g++	#ROBO gcc -> g++
+AS = $(PREFIX)g++ -x assembler-with-cpp		#ROBO gcc -> g++
 CP = $(PREFIX)objcopy
 AR = $(PREFIX)ar
 SZ = $(PREFIX)size
@@ -105,11 +105,12 @@ C_INCLUDES =  \
 # compile gcc flags
 ASFLAGS = $(MCU) $(AS_DEFS) $(AS_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections
 
-CFLAGS = $(MCU) $(C_DEFS) $(C_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections -std=gnu11
+CFLAGS = $(MCU) $(C_DEFS) $(C_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections #ROBO -std=gnu11
 
 ifeq ($(DEBUG), 1)
 CFLAGS += -g -gdwarf-2
 endif
+
 
 # Generate dependency information
 CFLAGS += -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)"
@@ -129,7 +130,7 @@ endif
 LDSCRIPT = STM32F103RCTx_FLASH.ld
 
 # libraries
-LIBS = -lc -lm -lnosys
+LIBS = -lc -lc -lrdimon -lnosys	#ROBO -lm -> -lc -lrdimon
 LIBDIR =
 LDFLAGS = $(MCU) -specs=nano.specs -T$(LDSCRIPT) $(LIBDIR) $(LIBS) -Wl,-Map=$(BUILD_DIR)/$(TARGET).map,--cref -Wl,--gc-sections
 
