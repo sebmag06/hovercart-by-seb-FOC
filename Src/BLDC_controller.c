@@ -19,7 +19,7 @@
 
 #include "BLDC_controller.h"
 
-extern uint8_t bRobo;
+extern uint16_t bRobo;
 
 /* Named constants for Chart: '<S5>/F03_02_Control_Mode_Manager' */
 #define IN_ACTIVE                      ((uint8_T)1U)

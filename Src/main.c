@@ -151,7 +151,7 @@ static uint32_t    inactivity_timeout_counter;
 static MultipleTap MultipleTapBrake;    // define multiple tap functionality for the Brake pedal
 
 // ROBO begin
-uint8_t bRobo = 0;
+uint16_t bRobo = 0;
 void Beep(uint16_t iMillis, uint8_t iPitch)
 {
   if (bRobo)	

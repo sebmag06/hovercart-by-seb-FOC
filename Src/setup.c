@@ -39,7 +39,7 @@ pb10 usart3 dma1 channel2/3
 #include "config.h"
 #include "setup.h"
 
-extern uint8_t bRobo;
+extern uint16_t bRobo;
 
 TIM_HandleTypeDef htim_right;
 TIM_HandleTypeDef htim_left;
