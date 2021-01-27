@@ -203,7 +203,7 @@ bRobo = 1;
   Input_Lim_Init();   // Input Limitations Init
 Beep(100,2);	// ROBO
   Input_Init();       // Input Init
-
+printf("Hello serial debug output. bRobo: %i\r\n",bRobo); 
 
 Beep(100,1);	// ROBO
  
@@ -211,8 +211,7 @@ Beep(100,1);	// ROBO
 Beep(200,3);	// ROBO
   HAL_ADC_Start(&hadc2);
 
-  
-  poweronMelody();
+    poweronMelody();
   HAL_GPIO_WritePin(LED_PORT, LED_PIN, GPIO_PIN_SET);
 
   int16_t cmdL      = 0, cmdR      = 0;
@@ -222,15 +221,16 @@ Beep(200,3);	// ROBO
   int16_t board_temp_adcFilt  = adc_buffer.temp;
   int16_t board_temp_deg_c;
 
+Beep(100,1);	// ROBO
 
   while(1) {
     HAL_Delay(DELAY_IN_MAIN_LOOP);        // delay in ms
 
-    Beep(100,1);	// ROBO
-
     readCommand();                        // Read Command: input1[inIdx].cmd, input2[inIdx].cmd
     calcAvgSpeed();                       // Calculate average measured speed: speedAvg, speedAvgAbs
 
+input1[inIdx].cmd = input2[inIdx].cmd = 0;  // robo ignore adc input;
+    
     #ifndef VARIANT_TRANSPOTTER
       // ####### MOTOR ENABLING: Only if the initial input is very small (for SAFETY) #######
       if (enable == 0 && (!rtY_Left.z_errCode && !rtY_Right.z_errCode) && (input1[inIdx].cmd > -50 && input1[inIdx].cmd < 50) && (input2[inIdx].cmd > -50 && input2[inIdx].cmd < 50)){
@@ -290,7 +290,7 @@ Beep(200,3);	// ROBO
         }
       #endif
 	
-    input2[inIdx].cmd = 30;
+input2[inIdx].cmd = 100;   // robo
     
       // ####### LOW-PASS FILTER #######
       rateLimiter16(input1[inIdx].cmd , RATE, &steerRateFixdt);
