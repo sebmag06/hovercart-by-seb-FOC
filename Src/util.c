@@ -34,6 +34,9 @@
 #include "hd44780.h"
 #endif
 
+extern uint16_t bRobo;
+extern void Beep(uint16_t iMillis, uint8_t iPitch);
+
 /* =========================== Variable Definitions =========================== */
 
 //------------------------------------------------------------------------
@@ -280,6 +283,8 @@ void Input_Lim_Init(void) {     // Input Limitations - ! Do NOT touch !
 }
 
 void Input_Init(void) {
+  
+  
   #if defined(CONTROL_PPM_LEFT) || defined(CONTROL_PPM_RIGHT)
     PPM_Init();
   #endif
@@ -308,8 +313,11 @@ void Input_Init(void) {
     UART_DisableRxErrors(&huart3);
   #endif
 
+  
   #if !defined(VARIANT_HOVERBOARD) && !defined(VARIANT_TRANSPOTTER)
-    uint16_t writeCheck, readVal;
+
+
+  	uint16_t writeCheck, readVal;
     HAL_FLASH_Unlock();
     EE_Init();            /* EEPROM Init */
     EE_ReadVariable(VirtAddVarTab[0], &writeCheck);
@@ -327,7 +335,11 @@ void Input_Init(void) {
         EE_ReadVariable(VirtAddVarTab[10+8*i] , &readVal); input2[i].max = (int16_t)readVal;
       }
     } else {
+//Beep(200,3);	// ROBO
       for (uint8_t i=0; i<INPUTS_NR; i++) {
+        
+//Beep(100,1);	// ROBO
+//Beep(50,2);	// ROBO
         if (input1[i].typDef == 3) {  // If Input type defined is 3 (auto), identify the input type based on the values from config.h
           input1[i].typ = checkInputType(input1[i].min, input1[i].mid, input1[i].max);
         } else {
@@ -339,10 +351,13 @@ void Input_Init(void) {
           input2[i].typ = input2[i].typDef;
         }
       }
+//Beep(200,4);	// ROBO
+      
     }
     HAL_FLASH_Lock();
   #endif
 
+  
   #ifdef VARIANT_TRANSPOTTER
     enable = 1;
 

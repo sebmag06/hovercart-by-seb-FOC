@@ -150,18 +150,6 @@ static int16_t    speed;                // local variable for speed. -1000 to 10
 static uint32_t    inactivity_timeout_counter;
 static MultipleTap MultipleTapBrake;    // define multiple tap functionality for the Brake pedal
 
-// ROBO begin
-uint16_t bRobo = 0;
-void Beep(uint16_t iMillis, uint8_t iPitch)
-{
-  if (bRobo)	
-    for (int i=iMillis/iPitch; i>0;i--) // 1000,1 => should output a 500 Hz tone for 2 seconds
-  	{
-    	HAL_GPIO_TogglePin(BUZZER_PORT, BUZZER_PIN);
-    	HAL_Delay(iPitch);
-  	}
-}  
-// ROBO end
 
 
 int main(void) {

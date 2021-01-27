@@ -28,6 +28,8 @@
 #include "config.h"
 #include "util.h"
 
+extern uint16_t bRobo;
+
 // Matlab includes and defines - from auto-code generation
 // ###############################################################################
 #include "BLDC_controller.h"           /* Model's header file */

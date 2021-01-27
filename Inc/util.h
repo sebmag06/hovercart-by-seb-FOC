@@ -24,6 +24,7 @@
 #include <stdint.h>
 
 
+
 // Rx Structures USART
 #if defined(CONTROL_SERIAL_USART2) || defined(CONTROL_SERIAL_USART3)
   #ifdef CONTROL_IBUS
