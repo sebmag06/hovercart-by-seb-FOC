@@ -150,6 +150,18 @@ static int16_t    speed;                // local variable for speed. -1000 to 10
 static uint32_t    inactivity_timeout_counter;
 static MultipleTap MultipleTapBrake;    // define multiple tap functionality for the Brake pedal
 
+// ROBO begin
+uint16_t bRobo = 0;
+void Beep(uint16_t iMillis, uint8_t iPitch)
+{
+  if (bRobo)	
+    for (int i=iMillis/iPitch; i>0;i--) // 1000,1 => should output a 500 Hz tone for 2 seconds
+  	{
+    	HAL_GPIO_TogglePin(BUZZER_PORT, BUZZER_PIN);
+    	HAL_Delay(iPitch);
+  	}
+}  
+// ROBO end
 
 
 int main(void) {
@@ -177,20 +189,29 @@ int main(void) {
 
   __HAL_RCC_DMA1_CLK_DISABLE();
   MX_GPIO_Init();
+  
+bRobo = 1;
+  
   MX_TIM_Init();
   MX_ADC1_Init();
   MX_ADC2_Init();
   BLDC_Init();        // BLDC Controller Init
 
+
+  
   HAL_GPIO_WritePin(OFF_PORT, OFF_PIN, GPIO_PIN_SET);   // Activate Latch
   Input_Lim_Init();   // Input Limitations Init
+Beep(100,2);	// ROBO
   Input_Init();       // Input Init
 
-//  bRobo = 1;
 
+Beep(100,1);	// ROBO
+ 
   HAL_ADC_Start(&hadc1);
+Beep(200,3);	// ROBO
   HAL_ADC_Start(&hadc2);
 
+  
   poweronMelody();
   HAL_GPIO_WritePin(LED_PORT, LED_PIN, GPIO_PIN_SET);
 
@@ -268,7 +289,9 @@ int main(void) {
           }
         }
       #endif
-
+	
+    input2[inIdx].cmd = 30;
+    
       // ####### LOW-PASS FILTER #######
       rateLimiter16(input1[inIdx].cmd , RATE, &steerRateFixdt);
       rateLimiter16(input2[inIdx].cmd , RATE, &speedRateFixdt);
