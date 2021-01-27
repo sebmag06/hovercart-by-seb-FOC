@@ -346,7 +346,9 @@ LCD_RESULT LCD_WriteFloat(LCD_PCF8574_HandleTypeDef* handle, double number,
 		uint8_t digits) {
 	// Handle negative numbers
 	if (number < 0.0) {
-		LCD_WriteString(handle,"-");
+      
+      	char p[] = "-";	// robo
+		LCD_WriteString(handle,p);
 		number = -number;
 	}
 
@@ -364,7 +366,8 @@ LCD_RESULT LCD_WriteFloat(LCD_PCF8574_HandleTypeDef* handle, double number,
 
 	// Print the decimal point, but only if there are digits beyond
 	if (digits > 0) {
-		LCD_WriteString(handle,".");
+      	char p[] = ".";	// robo
+		LCD_WriteString(handle,p);
 	}
 
 	// Extract digits from the remainder one at a time
